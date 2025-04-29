@@ -1,0 +1,102 @@
+"use client";
+import {
+  Card,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+} from "@material-tailwind/react";
+import { useLanguage } from "../../../context/LanguageProvider";
+import { useState } from "react";
+import { useAlert } from "../../../context/alertContext";
+import { signIn } from "../api/auth";
+import { useDispatch } from "react-redux";
+import { login } from "../../../redux/authSlice";
+import { useRouter } from "next/navigation";
+
+export default function Home() {
+  const { t } = useLanguage();
+  const { showAlert } = useAlert();
+  const router = useRouter();
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!username || !password) {
+      showAlert("Please input all details");
+      return;
+    }
+    setIsLoading(true);
+    const result = await signIn(username, password);
+    if (result) {
+      showAlert("Login Successfully", "success");
+      dispatch(login({ token: result.token, user: result.user }));
+      router.push("/");
+    } else {
+      showAlert("Invalid account. Try again");
+    }
+    setIsLoading(false);
+  };
+
+
+
+  if (!t) return <p className="text-white">Loading translations...</p>;
+  return (
+    <div className="w-full h-full flex justify-center items-center">
+      <Card
+        color="transparent"
+        shadow={true}
+        className="p-6 shadow-xl shadow-gray-400"
+      >
+        <Typography variant="h4" color="blue-gray">
+          {t("loginToAccount")}
+        </Typography>
+        <Typography color="gray" className="mt-1 font-normal">
+          {t("loginToAccountDescription")}
+        </Typography>
+        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+          <div className="mb-1 flex flex-col gap-6">
+            <Typography variant="h6" color="blue-gray" className="-mb-3">
+              {t("account")}
+            </Typography>
+            <Input
+              value={username}
+              placeholder={t("account")}
+              onChange={(e) => setUserName(e.target.value)}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              labelProps={{
+                className: "before:content-none after:content-none",
+              }}
+            />
+            <Typography variant="h6" color="blue-gray" className="-mb-3">
+              {t("password")}
+            </Typography>
+            <Input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type={t("password")}
+              placeholder={t("password")}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              labelProps={{
+                className: "before:content-none after:content-none",
+              }}
+            />
+          </div>
+          <Button
+            loading={isLoading}
+            type="submit"
+            color="red"
+            onClick={handleSubmit}
+            className="mt-6 flex justify-center"
+            fullWidth
+          >
+            {t("signin")}
+          </Button>
+        </form>
+      </Card>
+    </div>
+  );
+}

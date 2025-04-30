@@ -40,7 +40,7 @@ export default function Home() {
       }
     } catch (error) {
       console.log(error);
-      showAlert("Something went wrong. Try again");
+      showAlert("出了点问题。请重试");
       router.push("/login");
     } finally {
       setIsLoading(false);

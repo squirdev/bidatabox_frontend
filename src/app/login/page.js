@@ -26,22 +26,20 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !password) {
-      showAlert("Please input all details");
+      showAlert("请输入所有详情");
       return;
     }
     setIsLoading(true);
     const result = await signIn(username, password);
     if (result) {
-      showAlert("Login Successfully", "success");
+      showAlert("已成功登录系统", "success");
       dispatch(login({ token: result.token, user: result.user }));
       router.push("/");
     } else {
-      showAlert("Invalid account. Try again");
+      showAlert("账号无效，请重试");
     }
     setIsLoading(false);
   };
-
-
 
   if (!t) return <p className="text-white">Loading translations...</p>;
   return (

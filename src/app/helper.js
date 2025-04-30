@@ -82,7 +82,7 @@ export function isValidActiveDetect(
 ) {
   if (!taskName || !countryCode || !file) {
     return {
-      message: "Please fill in all required fields.",
+      message: "请填写所有必填字段。",
       valid: false,
     };
   } else {
@@ -102,7 +102,7 @@ export function isValidSocialDetect(
 ) {
   if (!taskName || !countryCode || !file) {
     return {
-      message: "Please fill in all required fields.",
+      message: "请填写所有必填字段。",
       valid: false,
     };
   } else {
@@ -115,7 +115,7 @@ export function isValidSocialDetect(
 
 export function isValidGenerateParam(amount, countryCode, subQuantity) {
   if (!amount || !countryCode || !subQuantity) {
-    return "Please fill in all required fields.";
+    return "请填写所有必填字段。";
   }
   return null;
 }

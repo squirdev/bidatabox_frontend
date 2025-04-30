@@ -106,102 +106,100 @@ export default function Home() {
             </thead>
             <tbody>
               <TableLoading isLoading={isLoading} colSpan={TABLE_HEAD.length} />
-              {detectList && detectList.length !== 0 ? (
-                detectList.map((row, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.taskname}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.fileurl ?? "处理中..."}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {getSimplifiedDateTime(row.createdAt)}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.entirenumber}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="red"
-                          className="font-bold p-4"
-                        >
-                          {row.activenumber != null
-                            ? row.activenumber
-                            : "处理中..."}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="red"
-                          className="font-bold p-4"
-                        >
-                          {row.unregisternumber != null
-                            ? row.unregisternumber
-                            : "处理中..."}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Tooltip content="Download File">
-                          <IconButton
-                            disabled={!row.activenumber}
-                            variant="text"
+              {detectList && detectList.length !== 0
+                ? detectList.map((row, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
                           >
-                            <Link
-                              href={`${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${row.fileurl}`}
+                            {row.taskname}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.fileurl ?? "处理中..."}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {getSimplifiedDateTime(row.createdAt)}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.entirenumber}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="red"
+                            className="font-bold p-4"
+                          >
+                            {row.activenumber != null
+                              ? row.activenumber
+                              : "处理中..."}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="red"
+                            className="font-bold p-4"
+                          >
+                            {row.unregisternumber != null
+                              ? row.unregisternumber
+                              : "处理中..."}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Tooltip content="Download File">
+                            <IconButton
+                              disabled={!row.activenumber}
+                              variant="text"
                             >
-                              <BsDownload
+                              <Link
+                                href={`${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${row.fileurl}`}
+                              >
+                                <BsDownload
+                                  strokeWidth={1.2}
+                                  className="h-4 w-4 text-green-700"
+                                />
+                              </Link>
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip content="Delete File">
+                            <IconButton
+                              variant="text"
+                              onClick={() => handleDeleteRow(row)}
+                            >
+                              <AiFillDelete
                                 strokeWidth={1.2}
-                                className="h-4 w-4 text-green-700"
+                                className="h-4 w-4 text-gray/700"
                               />
-                            </Link>
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip content="Delete File">
-                          <IconButton
-                            variant="text"
-                            onClick={() => handleDeleteRow(row)}
-                          >
-                            <AiFillDelete
-                              strokeWidth={1.2}
-                              className="h-4 w-4 text-gray/700"
-                            />
-                          </IconButton>
-                        </Tooltip>
-                      </td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <TableNoData colSpan={TABLE_HEAD.length} />
-              )}
+                            </IconButton>
+                          </Tooltip>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : !isLoading && <TableNoData colSpan={TABLE_HEAD.length} />}
             </tbody>
           </table>
         </div>

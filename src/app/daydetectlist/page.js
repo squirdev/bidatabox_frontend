@@ -117,152 +117,153 @@ export default function Home() {
             </thead>
             <tbody>
               <TableLoading isLoading={isLoading} colSpan={TABLE_HEAD.length} />
-              {detectList && detectList.length !== 0 ? (
-                detectList.map((row, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.taskname}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {getSimplifiedDateTime(row.createdAt)}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.activeday}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.type}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal p-4"
-                        >
-                          {row.entirenumber}
-                        </Typography>
-                      </td>
-                      <td className="flex justify-center">
-                        <Tooltip content={t("downloadValidFile")}>
-                          <IconButton
-                            disabled={!row.validfileurl}
-                            variant="text"
+              {detectList && detectList.length !== 0
+                ? detectList.map((row, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
                           >
-                            <a
-                              href={`${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${row.validfileurl}`}
-                              download={row.validfileurl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <BsDownload
-                                strokeWidth={1.2}
-                                className="h-4 w-4 text-green-700"
-                              />
-                            </a>
-                          </IconButton>
-                        </Tooltip>
-                        <Typography
-                          variant="small"
-                          color="red"
-                          className="font-bold py-3"
-                        >
-                          {row.validnumber != null
-                            ? row.validnumber
-                            : "处理中..."}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="red"
-                          className="font-bold p-4"
-                        >
-                          {row.activatednumber != null
-                            ? row.activatednumber
-                            : "处理中..."}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Typography
-                          variant="small"
-                          color="red"
-                          className="font-bold p-4"
-                        >
-                          {row.unknownnumber != null
-                            ? row.unknownnumber
-                            : "处理中..."}
-                        </Typography>
-                      </td>
-                      <td>
-                        <Tooltip content={t("downloadComressedFile")}>
-                          <IconButton
-                            disabled={!row.compressedfileurl}
-                            variant="text"
+                            {row.taskname}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
                           >
-                            <Link
-                              href={`${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${row.compressedfileurl}`}
-                            >
-                              <BsDownload
-                                strokeWidth={1.2}
-                                className="h-4 w-4 text-green-700"
-                              />
-                            </Link>
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip content={t("downloadCSVFile")}>
-                          <IconButton disabled={!row.csvfileurl} variant="text">
-                            <Link
-                              href={`${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${row.csvfileurl}`}
-                            >
-                              <BsDownload
-                                strokeWidth={1.2}
-                                className="h-4 w-4 text-green-700"
-                              />
-                            </Link>
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip content={t("deleteFile")}>
-                          <IconButton
-                            variant="text"
-                            onClick={() => handleDeleteRow(row)}
+                            {getSimplifiedDateTime(row.createdAt)}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
                           >
-                            <AiFillDelete
-                              strokeWidth={1.2}
-                              className="h-4 w-4 text-gray/700"
-                            />
-                          </IconButton>
-                        </Tooltip>
-                      </td>
-                    </tr>
-                  );
-                })
-              ) : (
-                <TableNoData colSpan={TABLE_HEAD.length} />
-              )}
+                            {row.activeday}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.type}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal p-4"
+                          >
+                            {row.entirenumber}
+                          </Typography>
+                        </td>
+                        <td className="flex justify-center">
+                          <Tooltip content={t("downloadValidFile")}>
+                            <IconButton
+                              disabled={!row.validfileurl}
+                              variant="text"
+                            >
+                              <a
+                                href={`${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${row.validfileurl}`}
+                                download={row.validfileurl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <BsDownload
+                                  strokeWidth={1.2}
+                                  className="h-4 w-4 text-green-700"
+                                />
+                              </a>
+                            </IconButton>
+                          </Tooltip>
+                          <Typography
+                            variant="small"
+                            color="red"
+                            className="font-bold py-3"
+                          >
+                            {row.validnumber != null
+                              ? row.validnumber
+                              : "处理中..."}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="red"
+                            className="font-bold p-4"
+                          >
+                            {row.activatednumber != null
+                              ? row.activatednumber
+                              : "处理中..."}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography
+                            variant="small"
+                            color="red"
+                            className="font-bold p-4"
+                          >
+                            {row.unknownnumber != null
+                              ? row.unknownnumber
+                              : "处理中..."}
+                          </Typography>
+                        </td>
+                        <td>
+                          <Tooltip content={t("downloadComressedFile")}>
+                            <IconButton
+                              disabled={!row.compressedfileurl}
+                              variant="text"
+                            >
+                              <Link
+                                href={`${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${row.compressedfileurl}`}
+                              >
+                                <BsDownload
+                                  strokeWidth={1.2}
+                                  className="h-4 w-4 text-green-700"
+                                />
+                              </Link>
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip content={t("downloadCSVFile")}>
+                            <IconButton
+                              disabled={!row.csvfileurl}
+                              variant="text"
+                            >
+                              <Link
+                                href={`${process.env.NEXT_PUBLIC_DOWNLOAD_URL}/${row.csvfileurl}`}
+                              >
+                                <BsDownload
+                                  strokeWidth={1.2}
+                                  className="h-4 w-4 text-green-700"
+                                />
+                              </Link>
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip content={t("deleteFile")}>
+                            <IconButton
+                              variant="text"
+                              onClick={() => handleDeleteRow(row)}
+                            >
+                              <AiFillDelete
+                                strokeWidth={1.2}
+                                className="h-4 w-4 text-gray/700"
+                              />
+                            </IconButton>
+                          </Tooltip>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : !isLoading && <TableNoData colSpan={TABLE_HEAD.length} />}
             </tbody>
           </table>
         </div>

@@ -94,11 +94,11 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
       <div className="w-full flex justify-between items-center p-4">
         <div className="flex items-center gap-2">
           <Image src={icon} width={28} height={28} alt="image" />
-          <Typography variant="h6">Add {social} days detection</Typography>
+          <Typography variant="h6">{t("add")} {social} days {t("detection")}</Typography>
         </div>
         <Link href={"/daydetectlist"} className="flex items-center gap-2">
           <BsListTask strokeWidth={1} />
-          <Typography variant="h6">Go to the list</Typography>
+          <Typography variant="h6">{t("goToList")}</Typography>
         </Link>
       </div>
       <hr />
@@ -106,13 +106,13 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
         <div className="w-full flex gap-2">
           <Input
             readOnly
-            label="Balance"
+            label={t("balance")}
             variant="static"
             value={user ? user.balance : 0}
           />
           <Input
             readOnly
-            label="Price"
+            label={t("price")}
             variant="static"
             value={user ? (social == "TG" ? user.tgCost : user.wsCost) : 0}
           />
@@ -127,7 +127,7 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
         <div className="w-full flex gap-2">
           <Select
             variant="static"
-            label="Active days"
+            label={t("activeDays")}
             onChange={(e) => setActiveDay(e)}
           >
             {activeDayList.map((day, index) => (
@@ -141,13 +141,13 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
         <Input
           type="file"
           variant="static"
-          label="Upload files"
+          label={t("uploadFiles")}
           className="file:hidden"
           onChange={handleChangeFile}
         />
         <div>
           <Button color="red" loading={isLoading} onClick={handleDetect}>
-            Submit
+            {t("submit")}
           </Button>
         </div>
         <UploadNote />

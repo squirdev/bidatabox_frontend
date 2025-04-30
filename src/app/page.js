@@ -126,7 +126,7 @@ export default function Home() {
         />
         <div>
           <Button color="red" loading={isLoading} onClick={handleDetect}>
-            Detect Active Phone
+            {t("detectActivePhone")}
           </Button>
         </div>
         <UploadNote />

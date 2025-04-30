@@ -79,5 +79,9 @@
     "downloadComressedFile": "Download compressed File",
     "downloadCSVFile": "Download CSV File",
     "deleteFile": "Delete File",
-    "downloadValidFile": "Download Valid File"
+    "downloadValidFile": "Download Valid File",
+    "activeDays": "Active days",
+    "goToList": "Go to the list",
+    "add": "Add",
+    "detection": "detection"
 }

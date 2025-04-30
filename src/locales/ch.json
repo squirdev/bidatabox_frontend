@@ -79,5 +79,9 @@
     "downloadComressedFile": "下载压缩文件",
     "downloadCSVFile": "下载 CSV 文件",
     "deleteFile": "删除文件",
-    "downloadValidFile": "下载有效文件"
+    "downloadValidFile": "下载有效文件",
+    "activeDays": "活跃天数",
+    "goToList": "前往列表",
+    "add": "添加",
+    "detection": "检测"
 }

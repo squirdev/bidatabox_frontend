@@ -1,11 +1,5 @@
 "use client";
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import { useLanguage } from "../../../context/LanguageProvider";
 import { useState } from "react";
 import { useAlert } from "../../../context/alertContext";
@@ -29,16 +23,22 @@ export default function Home() {
       showAlert("请输入所有详情");
       return;
     }
-    setIsLoading(true);
-    const result = await signIn(username, password);
-    if (result) {
-      showAlert("已成功登录系统", "success");
-      dispatch(login({ token: result.token, user: result.user }));
-      router.push("/");
-    } else {
+    try {
+      setIsLoading(true);
+      const result = await signIn(username, password);
+      if (result) {
+        showAlert("已成功登录系统", "success");
+        dispatch(login({ token: result.token, user: result.user }));
+        router.push("/");
+      } else {
+        showAlert("账号无效，请重试");
+      }
+    } catch (error) {
+      console.log("error", error);
       showAlert("账号无效，请重试");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   if (!t) return <p className="text-white">Loading translations...</p>;

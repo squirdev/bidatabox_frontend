@@ -26,9 +26,9 @@ function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>bidatabox</title>
+        <title>RedKingData</title>
       </head>
-      <body className="flex overflow-hidden" >
+      <body className="flex overflow-hidden">
         <ReduxProvider>
           <LanguageProvider>
             {shouldShowFooter && <SideBar sidebarShow={sidebarShow} />}

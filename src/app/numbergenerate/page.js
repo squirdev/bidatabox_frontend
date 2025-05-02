@@ -25,6 +25,12 @@ export default function Home() {
   const [countryCode, setCountryCode] = useState("");
   const [subQuantity, setSubQuantity] = useState(0);
   const [amount, setAmount] = useState(0);
+  const [file, setFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChangeFile = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   const handleGenerate = async () => {
     const validErrorMsg = isValidGenerateParam(
@@ -36,8 +42,20 @@ export default function Home() {
       showAlert(validErrorMsg);
       return;
     }
-    const result = await generatePhoneNumbers(countryCode, amount, subQuantity);
-    downloadTextFile(result);
+    try {
+      setIsLoading(true);
+      const result = await generatePhoneNumbers({
+        file,
+        amount,
+        countryCode,
+        subQuantity,
+      });
+      downloadTextFile(result);
+    } catch (error) {
+      showAlert(t("genErrMsg"));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!t) return <p className="text-white">Loading translations...</p>;
@@ -48,15 +66,36 @@ export default function Home() {
       </div>
       <hr />
       <div className="w-full mt-4 p-4 flex flex-col gap-12">
-        <SelectCountry code={countryCode} setCode={setCountryCode} />
+        <div className="flex justify-between items-center gap-4">
+          <SelectCountry code={countryCode} setCode={setCountryCode} />
+          <Input
+            type="file"
+            variant="static"
+            className="file:hidden"
+            label={t("uploadCompareFiles")}
+            onChange={handleChangeFile}
+          />
+        </div>
         <div className="flex justify-between items-center gap-4">
           <Input
-            value={amount}
             type="number"
-            variant="static"
             max={5000000}
+            value={amount}
+            variant="static"
             label={t("amount")}
-            onChange={(e) => setAmount(Math.min(e.target.value, 5000000))}
+            onChange={(e) => {
+              const rawValue = e.target.value;
+
+              if (rawValue === "") {
+                setAmount("");
+                return;
+              }
+              const intValue = parseInt(rawValue, 10);
+
+              if (!isNaN(intValue)) {
+                setAmount(Math.min(intValue, 5000000));
+              }
+            }}
           />
           <Select
             variant="static"
@@ -71,7 +110,7 @@ export default function Home() {
           </Select>
         </div>
         <div>
-          <Button color="red" onClick={handleGenerate}>
+          <Button color="red" loading={isLoading} onClick={handleGenerate}>
             {t("submit")}
           </Button>
         </div>

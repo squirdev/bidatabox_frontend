@@ -9,7 +9,7 @@
     "search": "搜索",
     "goBack": "返回",
     "balance": "余额",
-    "price": "每10000个号码的价格",
+    "price": "每10000个号码的积分",
     "language": "语言",
     "operation": "操作",
     "reload": "重新加载",
@@ -50,6 +50,7 @@
     "lastFewNumbers": "最后几位数字",
     "subcontractingQuantity": "分包数量",
     "uploadFiles": "上传文件",
+    "uploadCompareFiles": "上传异常对比文件",
     "uploadNote1": "提示：无论号码文件中的号码是否带国家代码，国家代码都必须选择",
     "uploadNote2": "提示：每批上传的号码只能是同一个国家的号码，不支持同时分析多个国家的号码。",
     "uploadNote3": "提示：分析后下载的号码系统已自动附带国家代码。",
@@ -83,5 +84,7 @@
     "activeDays": "活跃天数",
     "goToList": "前往列表",
     "add": "添加",
-    "detection": "检测"
+    "detection": "检测",
+    "genErrMsg": "生成电话号码时发生了意外错误",
+    "currentPoint": "当前积分"
 }

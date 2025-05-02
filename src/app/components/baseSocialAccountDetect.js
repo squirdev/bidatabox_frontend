@@ -94,7 +94,9 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
       <div className="w-full flex justify-between items-center p-4">
         <div className="flex items-center gap-2">
           <Image src={icon} width={28} height={28} alt="image" />
-          <Typography variant="h6">{t("add")} {social} days {t("detection")}</Typography>
+          <Typography variant="h6">
+            {t("add")} {social} days {t("detection")}
+          </Typography>
         </div>
         <Link href={"/daydetectlist"} className="flex items-center gap-2">
           <BsListTask strokeWidth={1} />
@@ -106,9 +108,9 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
         <div className="w-full flex gap-2">
           <Input
             readOnly
-            label={t("balance")}
+            label={t("currentPoint")}
             variant="static"
-            value={user ? user.balance : 0}
+            value={user ? Math.round(user.balance) : 0}
           />
           <Input
             readOnly

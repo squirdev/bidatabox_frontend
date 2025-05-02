@@ -120,7 +120,12 @@ export function isValidGenerateParam(amount, countryCode, subQuantity) {
   return null;
 }
 
-export async function generatePhoneNumbers(countryCode, amount, subQuantity) {
+export async function generatePhoneNumbers({
+  file,
+  amount,
+  countryCode,
+  subQuantity,
+}) {
   const rules = countryRules[countryCode];
   if (!rules) {
     throw new Error(`Unsupported country code: ${countryCode}`);
@@ -131,6 +136,17 @@ export async function generatePhoneNumbers(countryCode, amount, subQuantity) {
   const resultBatches = [];
   const currentBatch = new Set();
 
+  // Read the file and store excluded numbers
+  const excludedNumbers = new Set();
+  if (file) {
+    const text = await file.text();
+    text
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter((line) => line.length > 0)
+      .forEach((number) => excludedNumbers.add(number));
+  }
+
   while (currentBatch.size < amount) {
     const segment = segments[Math.floor(Math.random() * segments.length)];
     const randomNumber = Math.floor(Math.random() * maxNumber);
@@ -139,6 +155,7 @@ export async function generatePhoneNumbers(countryCode, amount, subQuantity) {
     if (lastPart === "0000000" || lastPart === "00000000") continue;
 
     const fullNumber = `${countryCode}${segment}${lastPart}`;
+    if (excludedNumbers.has(fullNumber)) continue;
     currentBatch.add(fullNumber);
   }
 

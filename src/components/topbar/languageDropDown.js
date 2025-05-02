@@ -18,7 +18,6 @@ const LanguageDropDown = () => {
   }, [setLocale]);
 
   const handleSetLanguage = (lang) => {
-    console.log("Language", lang);
     localStorage.setItem("language", lang);
     setLocale(lang);
   };

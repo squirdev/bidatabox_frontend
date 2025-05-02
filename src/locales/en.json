@@ -9,7 +9,7 @@
     "search": "Search",
     "goBack": "Go Back",
     "balance": "Balance",
-    "price": "Price per 10000 numbers",
+    "price": "Point per 10000 numbers",
     "language": "Language",
     "operation": "Operation",
     "reload": "Reload",
@@ -49,7 +49,8 @@
     "numberSegmentPlaceHolder": "Multiple, seperated or one per line, up to 100 at a time",
     "lastFewNumbers": "The last few numbers",
     "subcontractingQuantity": "Subcontracting quantity",
-    "uploadFiles": "Upload Files",
+    "uploadFiles": "Upload File",
+    "uploadCompareFiles": "Upload Compare Files",
     "uploadNote1": "Note: No matter whether the number in the number file has a country code or not, the country code must be selected",
     "uploadNote2": "Note: Numbers uploaded in each batch can only be numbers from the same country, and analytics of numbers from multiple countries at one time is not supported.",
     "uploadNote3": "Note: After analytics, the downloaded number system has already brought the country code.",
@@ -83,5 +84,7 @@
     "activeDays": "Active days",
     "goToList": "Go to the list",
     "add": "Add",
-    "detection": "detection"
+    "detection": "detection",
+    "genErrMsg": "An unexpected error occured while generating phone numbers",
+    "currentPoint": "Current Point"
 }

@@ -98,8 +98,8 @@ export default function Home() {
           <Input
             readOnly
             variant="static"
-            value={user ? user.balance : 0}
-            label={t("balance")}
+            value={user ? Math.round(user.balance) : 0}
+            label={t("currentPoint")}
           />
           <Input
             readOnly

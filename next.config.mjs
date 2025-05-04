@@ -19,7 +19,7 @@ const nextConfig = {
     },
     i18n: {
         locales: ['en', 'ch'], // Add your supported locales
-        defaultLocale: 'en', // Set the default locale
+        defaultLocale: 'ch', // Set the default locale
         localeDetection: false,
     },
     reactStrictMode: false

@@ -23,8 +23,7 @@ export default function Home() {
   const { t } = useLanguage();
   const { showAlert } = useAlert();
   const [countryCode, setCountryCode] = useState("");
-  const [subQuantity, setSubQuantity] = useState(0);
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(200000);
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,11 +32,7 @@ export default function Home() {
   };
 
   const handleGenerate = async () => {
-    const validErrorMsg = isValidGenerateParam(
-      amount,
-      countryCode,
-      subQuantity
-    );
+    const validErrorMsg = isValidGenerateParam(amount, countryCode);
     if (validErrorMsg) {
       showAlert(validErrorMsg);
       return;
@@ -48,7 +43,6 @@ export default function Home() {
         file,
         amount,
         countryCode,
-        subQuantity,
       });
       downloadTextFile(result);
     } catch (error) {
@@ -97,17 +91,6 @@ export default function Home() {
               }
             }}
           />
-          <Select
-            variant="static"
-            label={t("subcontractingQuantity")}
-            onChange={(e) => setSubQuantity(e)}
-          >
-            {[1500000, 1000000, 500000].map((value, i) => (
-              <Option key={i} value={value}>
-                {value.toLocaleString()}
-              </Option>
-            ))}
-          </Select>
         </div>
         <div>
           <Button color="red" loading={isLoading} onClick={handleGenerate}>

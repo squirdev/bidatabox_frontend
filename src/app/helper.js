@@ -113,19 +113,14 @@ export function isValidSocialDetect(
   }
 }
 
-export function isValidGenerateParam(amount, countryCode, subQuantity) {
-  if (!amount || !countryCode || !subQuantity) {
+export function isValidGenerateParam(amount, countryCode) {
+  if (!amount || !countryCode) {
     return "请填写所有必填字段。";
   }
   return null;
 }
 
-export async function generatePhoneNumbers({
-  file,
-  amount,
-  countryCode,
-  subQuantity,
-}) {
+export async function generatePhoneNumbers({ file, amount, countryCode }) {
   const rules = countryRules[countryCode];
   if (!rules) {
     throw new Error(`Unsupported country code: ${countryCode}`);
@@ -161,7 +156,7 @@ export async function generatePhoneNumbers({
 
   const phoneNumbers = Array.from(currentBatch);
   while (phoneNumbers.length) {
-    resultBatches.push(phoneNumbers.splice(0, subQuantity));
+    resultBatches.push(phoneNumbers.splice(0, 200000));
   }
 
   return resultBatches;

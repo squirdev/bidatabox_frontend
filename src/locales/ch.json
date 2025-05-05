@@ -22,7 +22,7 @@
     "signin": "登录",
     "screeningTime": "筛查时间",
     "screeningNumber": "筛查号码",
-    "activeDetection": "活跃检测",
+    "activeDetection": "空号检测",
     "activatedNumber": "已激活号码",
     "unregistedNumber": "未注册号码",
     "rechargePoints": "充值积分",

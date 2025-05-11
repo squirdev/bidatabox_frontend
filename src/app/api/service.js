@@ -17,6 +17,23 @@ export const uploadRequest = async ({ taskName, countryCode, file }) => {
   }
 };
 
+export const uploadPreRequest = async ({ taskName, countryCode, zipIndex }) => {
+  try {
+    const formData = new FormData();
+    formData.append("zipIndex", zipIndex);
+    formData.append("taskName", taskName);
+    formData.append("countryCode", countryCode);
+    const response = await axiosApi.post("/service/phonePreUpload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+};
+
 export const uploadSocialRequest = async ({
   file,
   social,
@@ -32,6 +49,31 @@ export const uploadSocialRequest = async ({
     formData.append("activeDay", activeDay);
     formData.append("countryCode", countryCode);
     const response = await axiosApi.post("/service/socialUpload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const uploadSocialPrePreRequest = async ({
+  social,
+  taskName,
+  activeDay,
+  countryCode,
+  zipIndex,
+}) => {
+  try {
+    const formData = new FormData();
+    formData.append("social", social);
+    formData.append("zipIndex", zipIndex);
+    formData.append("taskName", taskName);
+    formData.append("activeDay", activeDay);
+    formData.append("countryCode", countryCode);
+    const response = await axiosApi.post("/service/socialPreUpload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

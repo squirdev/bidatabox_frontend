@@ -59,12 +59,12 @@ export const countryRules = {
     segments: ["6"],
     lastLength: 7,
   },
-  81: {
-    // Japan: e.g., 090, 080, 070 + 8 digits
-    country: "Japan",
-    segments: ["090", "080", "070", "050"],
-    lastLength: 8,
-  },
+  // 81: {
+  //   // Japan: e.g., 090, 080, 070 + 8 digits
+  //   country: "Japan",
+  //   segments: ["090", "080", "070", "050"],
+  //   lastLength: 8,
+  // },
   886: {
     // Taiwan: e.g., 09x + 8 digits
     country: "Taiwan",
@@ -191,4 +191,14 @@ export function getSimplifiedDateTime(isoString) {
   // Format the output as YYYY-MM-DD HH:mm:ss
   const simpleDateTime = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
   return simpleDateTime;
+}
+
+export function getTimeStrHeader(social) {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
+
+  const formattedDate = `${social}_${year}_${month}_${day}`;
+  return formattedDate;
 }

@@ -82,13 +82,33 @@ const SideBar = ({ sidebarShow }) => {
         },
       ],
     },
+    // {
+    //   title: t("numberArchiving"),
+    //   icon: BsPhoneFill,
+    //   detail: [
+    //     {
+    //       subTitle: t("numberGeneration"),
+    //       url: "/numbergenerate",
+    //     },
+    //   ],
+    // },
     {
-      title: t("numberArchiving"),
+      title: t("reward"),
       icon: BsPhoneFill,
       detail: [
         {
-          subTitle: t("numberGeneration"),
-          url: "/numbergenerate",
+          subTitle: t("reward"),
+          url: "/reward",
+        },
+      ],
+    },
+    {
+      title: t("numberCompare"),
+      icon: BsPhoneFill,
+      detail: [
+        {
+          subTitle: t("numberCompare"),
+          url: "/compare",
         },
       ],
     },

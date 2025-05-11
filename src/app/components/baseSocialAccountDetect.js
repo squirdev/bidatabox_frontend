@@ -95,7 +95,7 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
         <div className="flex items-center gap-2">
           <Image src={icon} width={28} height={28} alt="image" />
           <Typography variant="h6">
-            {t("add")} {social} days {t("detection")}
+            {t("add")} {social} Days {t("detection")}
           </Typography>
         </div>
         <Link href={"/daydetectlist"} className="flex items-center gap-2">

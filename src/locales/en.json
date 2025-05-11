@@ -86,5 +86,11 @@
     "add": "Add",
     "detection": "detection",
     "genErrMsg": "An unexpected error occured while generating phone numbers",
-    "currentPoint": "Current Point"
+    "currentPoint": "Current Point",
+    "numberCompare": "Number Compare",
+    "reward": "Reward",
+    "compareNote1": "Please upload two phone numbers file.",
+    "compareNote2": "System will detect the same number from first and second file.",
+    "compareNote3": "Then it will be downloaded automatically.",
+    "freeNumbers": "Free:"
 }

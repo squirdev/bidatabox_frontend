@@ -4,7 +4,7 @@ import { saveAs } from "file-saver";
 export const countryRules = {
   86: {
     // China: 3-digit segment + 8-digit number (e.g., 13812345678)
-    country: "China",
+    country: "中国大陆",
     segments: [
       "130",
       "131",
@@ -49,13 +49,13 @@ export const countryRules = {
   },
   852: {
     // Hong Kong: 8-digit number, segments typically 5-9 (e.g., 91234567)
-    country: "Hong Kong",
+    country: "香港",
     segments: ["5", "6", "9"],
     lastLength: 7,
   },
   853: {
     // Macau: 8-digit number, segments usually start with 6
-    country: "Macau",
+    country: "澳门",
     segments: ["6"],
     lastLength: 7,
   },
@@ -67,7 +67,7 @@ export const countryRules = {
   // },
   886: {
     // Taiwan: e.g., 09x + 8 digits
-    country: "Taiwan",
+    country: "台湾",
     segments: ["900", "901", "902", "903", "905", "906", "907", "908", "909"],
     lastLength: 7,
   },

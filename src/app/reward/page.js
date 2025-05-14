@@ -1,19 +1,14 @@
 "use client";
 
-import {
-  Card,
-  IconButton,
-  Spinner,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, IconButton, Typography } from "@material-tailwind/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "../../../context/LanguageProvider";
-import { getTimeStrHeader } from "../helper";
 import { uploadPreRequest, uploadSocialPrePreRequest } from "../api/service";
 import { useAlert } from "../../../context/alertContext";
 import SelectCountry from "../components/countrySelect";
+import RewardConfirmModal from "../components/rewardConfirmModal";
 
 const FreeRewards = () => {
   const { t } = useLanguage();
@@ -21,8 +16,33 @@ const FreeRewards = () => {
   const { showAlert } = useAlert();
   const [countryCode, setCountryCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [zipIndex, setZipIndex] = useState(-1);
+  const [taskName, setTaskName] = useState("");
+  const [actionType, setActionType] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [actionDay, setActionDay] = useState(0);
+  const [phoneHistory, setPhHistory] = useState([]);
+  const [telegramHistory, setTelegramHistory] = useState([]);
+  const [whatsappHistory, setWhatsappHistory] = useState([]);
 
-  const handlePrePhoneDetect = async (index) => {
+  useEffect(() => {
+    const storedPH = localStorage.getItem("PH");
+    setPhHistory(storedPH ? JSON.parse(storedPH) : []);
+
+    const storedTG = localStorage.getItem("TG");
+    setTelegramHistory(storedTG ? JSON.parse(storedTG) : []);
+
+    const storedWS = localStorage.getItem("WS");
+    setWhatsappHistory(storedWS ? JSON.parse(storedWS) : []);
+  }, []);
+
+  const openConfirmModal = (index, actionIndex) => {
+    setZipIndex(index);
+    setActionType(actionIndex);
+    setModalOpen(true);
+  };
+
+  const handlePrePhoneDetect = async () => {
     if (!countryCode) {
       showAlert("请选择国家");
       return;
@@ -30,9 +50,9 @@ const FreeRewards = () => {
     try {
       setIsLoading(true);
       const result = await uploadPreRequest({
-        taskName: getTimeStrHeader("Phone"),
+        taskName: taskName,
         countryCode: countryCode,
-        zipIndex: index,
+        zipIndex: zipIndex,
       });
       if (result) {
         if (result.RES != "100") {
@@ -40,7 +60,9 @@ const FreeRewards = () => {
           return;
         }
         showAlert("行动成功");
-        router.push("/daydetectlist");
+        setPhHistory([...phoneHistory, zipIndex]);
+        localStorage.setItem("PH", JSON.stringify([...phoneHistory, zipIndex]));
+        router.push("/detectlist");
       } else {
         showAlert("出了点问题");
       }
@@ -51,7 +73,7 @@ const FreeRewards = () => {
     }
   };
 
-  const handlePreTGDetect = async (index) => {
+  const handlePreTGDetect = async () => {
     if (!countryCode) {
       showAlert("请选择国家");
       return;
@@ -60,10 +82,10 @@ const FreeRewards = () => {
       setIsLoading(true);
       const result = await uploadSocialPrePreRequest({
         social: "TG",
-        taskName: getTimeStrHeader("TG"),
-        activeDay: 60,
+        taskName: taskName,
+        activeDay: actionDay,
         countryCode: countryCode,
-        zipIndex: index,
+        zipIndex: zipIndex,
       });
       if (result) {
         if (result.RES != "100") {
@@ -71,6 +93,11 @@ const FreeRewards = () => {
           return;
         }
         showAlert("行动成功");
+        setTelegramHistory([...telegramHistory, zipIndex]);
+        localStorage.setItem(
+          "TG",
+          JSON.stringify([...telegramHistory, zipIndex])
+        );
         router.push("/daydetectlist");
       } else {
         showAlert("出了点问题");
@@ -82,7 +109,7 @@ const FreeRewards = () => {
     }
   };
 
-  const handlePreWSDetect = async (index) => {
+  const handlePreWSDetect = async () => {
     if (!countryCode) {
       showAlert("请选择国家");
       return;
@@ -91,10 +118,10 @@ const FreeRewards = () => {
       setIsLoading(true);
       const result = await uploadSocialPrePreRequest({
         social: "WS",
-        taskName: getTimeStrHeader("WS"),
-        activeDay: 60,
+        taskName: taskName,
+        activeDay: actionDay,
         countryCode: countryCode,
-        zipIndex: index,
+        zipIndex: zipIndex,
       });
 
       if (result) {
@@ -103,6 +130,11 @@ const FreeRewards = () => {
           return;
         }
         showAlert("行动成功");
+        setWhatsappHistory([...whatsappHistory, zipIndex]);
+        localStorage.setItem(
+          "WS",
+          JSON.stringify([...whatsappHistory, zipIndex])
+        );
         router.push("/daydetectlist");
       } else {
         showAlert("出了点问题");
@@ -112,6 +144,15 @@ const FreeRewards = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleConfirm = () => {
+    if (actionType == 0) {
+      handlePrePhoneDetect();
+    } else if (actionType == 1) {
+      handlePreTGDetect();
+    } else handlePreWSDetect();
+    setModalOpen(false);
   };
 
   if (!t) return <p className="text-white">Loading translations...</p>;
@@ -121,9 +162,6 @@ const FreeRewards = () => {
         <SelectCountry code={countryCode} setCode={setCountryCode} />
       </div>
       <div className="w-full grid grid-cols-5 gap-8 pb-8 relative px-4">
-        {isLoading && (
-          <div className="absolute w-full h-full bg-gray-300 z-50 opacity-50" />
-        )}
         {Array.from({ length: 50 }).map((_, index) => {
           return (
             <Card
@@ -142,11 +180,14 @@ const FreeRewards = () => {
                   </Typography>
                 </div>
               </div>
-              <div className="w-full flex justify-center">
+              <div className="w-full flex justify-center gap-1">
                 <IconButton
-                  onClick={() => handlePrePhoneDetect(index)}
+                  onClick={() => openConfirmModal(index, 0)}
                   variant="text"
                 >
+                  {phoneHistory.includes(index) && (
+                    <div className="absolute rounded-full w-2 h-2 bg-red-500 -top-1 -left-1" />
+                  )}
                   <Image
                     src={"/social/phone.png"}
                     width={20}
@@ -156,8 +197,11 @@ const FreeRewards = () => {
                 </IconButton>
                 <IconButton
                   variant="text"
-                  onClick={() => handlePreTGDetect(index)}
+                  onClick={() => openConfirmModal(index, 1)}
                 >
+                  {telegramHistory.includes(index) && (
+                    <div className="absolute rounded-full w-2 h-2 bg-red-500 -top-1 -left-1" />
+                  )}
                   <Image
                     src={"/social/telegram.png"}
                     width={20}
@@ -167,8 +211,11 @@ const FreeRewards = () => {
                 </IconButton>
                 <IconButton
                   variant="text"
-                  onClick={() => handlePreWSDetect(index)}
+                  onClick={() => openConfirmModal(index, 2)}
                 >
+                  {whatsappHistory.includes(index) && (
+                    <div className="absolute rounded-full w-2 h-2 bg-red-500 -top-1 -left-1" />
+                  )}
                   <Image
                     src={"/social/whatsapp.png"}
                     width={20}
@@ -181,6 +228,16 @@ const FreeRewards = () => {
           );
         })}
       </div>
+      <RewardConfirmModal
+        open={modalOpen}
+        onClose={setModalOpen}
+        loading={isLoading}
+        actionType={actionType}
+        taskName={taskName}
+        setTaskName={setTaskName}
+        handleConfirm={handleConfirm}
+        setActionDay={setActionDay}
+      />
     </div>
   );
 };

@@ -35,13 +35,7 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDetect = async () => {
-    const validCheck = isValidSocialDetect(
-      user.balance,
-      user.phoneCost,
-      taskName,
-      countryCode,
-      file
-    );
+    const validCheck = isValidSocialDetect(taskName, countryCode, file);
     if (!validCheck.valid) {
       showAlert(validCheck.message);
       return;

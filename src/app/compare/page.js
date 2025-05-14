@@ -78,7 +78,7 @@ export default function Home() {
   return (
     <div className="w-full h-full bg-white">
       <div className="w-full p-4">
-        <Typography variant="h6">Add Compare Task</Typography>
+        <Typography variant="h6">{t("addCompareTask")}</Typography>
       </div>
       <hr />
       <div className="w-full mt-4 p-4 flex flex-col gap-12">

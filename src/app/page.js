@@ -33,13 +33,7 @@ export default function Home() {
   };
 
   const handleDetect = async () => {
-    const validCheck = isValidActiveDetect(
-      user.balance,
-      user.phoneCost,
-      taskName,
-      countryCode,
-      file
-    );
+    const validCheck = isValidActiveDetect(taskName, countryCode, file);
     if (!validCheck.valid) {
       showAlert(validCheck.message);
       return;
@@ -103,7 +97,7 @@ export default function Home() {
           />
           <Input
             readOnly
-            value={user ? user.phoneCost : 0}
+            value={"65"}
             variant="static"
             label={t("price")}
             placeholder={t("price")}

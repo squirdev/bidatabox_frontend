@@ -92,5 +92,6 @@
     "compareNote1": "Please upload two phone numbers file.",
     "compareNote2": "System will detect the same number from first and second file.",
     "compareNote3": "Then it will be downloaded automatically.",
-    "freeNumbers": "Free:"
+    "freeNumbers": "Free:",
+    "addCompareTask": "Add Compare Task"
 }

@@ -9,7 +9,7 @@
     "search": "搜索",
     "goBack": "返回",
     "balance": "余额",
-    "price": "每200000个号码的积分",
+    "price": "每10000个号码的积分",
     "language": "语言",
     "operation": "操作",
     "reload": "重新加载",
@@ -92,5 +92,6 @@
     "compareNote1": "请上传两个电话号码文件。",
     "compareNote2": "系统会检测第一个文件和第二个文件中的号码是否相同。",
     "compareNote3": "然后会自动下载。",
-    "freeNumbers": "免费号码："
+    "freeNumbers": "免费号码：",
+    "addCompareTask": "添加比较任务"
 }

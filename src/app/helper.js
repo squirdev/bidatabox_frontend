@@ -50,7 +50,7 @@ export const countryRules = {
   852: {
     // Hong Kong: 8-digit number, segments typically 5-9 (e.g., 91234567)
     country: "香港",
-    segments: ["5", "6", "9"],
+    segments: ["4", "7", "8"],
     lastLength: 7,
   },
   853: {

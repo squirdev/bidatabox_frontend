@@ -119,7 +119,7 @@ const SideBar = ({ sidebarShow }) => {
         className={`h-screen max-w-[16rem] transform transition-all duration-500 ease-in-out overflow-hidden rounded-none shadow-md shadow-gray-500  ${sidebarShow ? "w-64" : "w-0"}`}
       >
         <div className="flex justify-center items-center h-20 py-3 bg-gray-200">
-          <Image src={"/logo.png"} width={150} height={20} alt="logo" />
+          <Image src={"/log.png"} width={150} height={20} alt="logo" />
         </div>
         <List className="p-0 mt-4 text-sm">
           {sideBarItem.map((sideItem, index) => (

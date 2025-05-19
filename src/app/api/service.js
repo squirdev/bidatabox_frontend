@@ -1,11 +1,10 @@
 import axiosApi from "../../../utils/axios";
 
-export const uploadRequest = async ({ taskName, countryCode, file }) => {
+export const uploadRequest = async ({ taskName, file }) => {
   try {
     const formData = new FormData();
-    formData.append("file", file); // assuming selectedFile is a File object
+    formData.append("file", file);
     formData.append("taskName", taskName);
-    formData.append("countryCode", countryCode);
     const response = await axiosApi.post("/service/phoneUpload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",

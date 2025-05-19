@@ -6,7 +6,6 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { BsListTask } from "react-icons/bs";
-import SelectCountry from "./countrySelect";
 import UploadNote from "./uploadNote";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -29,13 +28,12 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
   const router = useRouter();
   const { showAlert } = useAlert();
   const [taskName, setTaskName] = useState("");
-  const [countryCode, setCountryCode] = useState("");
   const [activeDay, setActiveDay] = useState(0);
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleDetect = async () => {
-    const validCheck = isValidSocialDetect(taskName, countryCode, file);
+    const validCheck = isValidSocialDetect(taskName, file);
     if (!validCheck.valid) {
       showAlert(validCheck.message);
       return;
@@ -47,7 +45,6 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
         social,
         taskName,
         activeDay,
-        countryCode,
       });
       if (result) {
         if (result.RES == "100") {
@@ -133,7 +130,6 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
             ))}
           </Select>
         </div>
-        <SelectCountry code={countryCode} setCode={setCountryCode} />
         <Input
           type="file"
           variant="static"

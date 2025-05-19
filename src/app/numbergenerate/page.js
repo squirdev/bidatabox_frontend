@@ -2,13 +2,7 @@
 
 import { useState } from "react";
 
-import {
-  Button,
-  Input,
-  Option,
-  Select,
-  Typography,
-} from "@material-tailwind/react";
+import { Button, Input, Typography } from "@material-tailwind/react";
 import { useLanguage } from "../../../context/LanguageProvider";
 import GenerateNote from "../components/generateNote";
 import { useAlert } from "../../../context/alertContext";

@@ -73,8 +73,8 @@ export const countryRules = {
   },
 };
 
-export function isValidActiveDetect(taskName, countryCode, file) {
-  if (!taskName || !countryCode || !file) {
+export function isValidActiveDetect(taskName, file) {
+  if (!taskName || !file) {
     return {
       message: "请填写所有必填字段。",
       valid: false,
@@ -87,8 +87,8 @@ export function isValidActiveDetect(taskName, countryCode, file) {
   }
 }
 
-export function isValidSocialDetect(taskName, countryCode, file) {
-  if (!taskName || !countryCode || !file) {
+export function isValidSocialDetect(taskName, file) {
+  if (!taskName || !file) {
     return {
       message: "请填写所有必填字段。",
       valid: false,

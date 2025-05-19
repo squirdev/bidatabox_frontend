@@ -6,7 +6,6 @@ import { Button, Input, Typography } from "@material-tailwind/react";
 import { BsArrowLeft } from "react-icons/bs";
 
 import UploadNote from "./components/uploadNote";
-import SelectCountry from "./components/countrySelect";
 import { useLanguage } from "../../context/LanguageProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "../../context/alertContext";
@@ -24,7 +23,6 @@ export default function Home() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [taskName, setTaskName] = useState("");
-  const [countryCode, setCountryCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState(null);
 
@@ -33,7 +31,7 @@ export default function Home() {
   };
 
   const handleDetect = async () => {
-    const validCheck = isValidActiveDetect(taskName, countryCode, file);
+    const validCheck = isValidActiveDetect(taskName, file);
     if (!validCheck.valid) {
       showAlert(validCheck.message);
       return;
@@ -42,7 +40,6 @@ export default function Home() {
       setIsLoading(true);
       const result = await uploadRequest({
         taskName,
-        countryCode,
         file,
       });
       if (result) {
@@ -110,7 +107,6 @@ export default function Home() {
           placeholder={t("taskName")}
           onChange={(e) => setTaskName(e.target.value)}
         />
-        <SelectCountry code={countryCode} setCode={setCountryCode} />
         <Input
           type="file"
           variant="static"

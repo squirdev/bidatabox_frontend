@@ -26,7 +26,7 @@ function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>RedKingData</title>
+        <title>QiXiang</title>
       </head>
       <body className="flex overflow-hidden">
         <ReduxProvider>

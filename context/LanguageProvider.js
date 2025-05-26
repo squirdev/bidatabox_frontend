@@ -7,7 +7,7 @@ import { getMessages } from "@/i18n";
 const LanguageContext = createContext(null);
 
 export function LanguageProvider({ children }) {
-  const [locale, setLocale] = useState("en");
+  const [locale, setLocale] = useState("ch");
   const [t, setT] = useState(null);
 
   useEffect(() => {

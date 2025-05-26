@@ -14,7 +14,7 @@ const LanguageDropDown = () => {
   if (!t) return <p>Loading translations...</p>;
 
   useEffect(() => {
-    if (setLocale) setLocale(localStorage.getItem("language") || "en");
+    if (setLocale) setLocale(localStorage.getItem("language") || "ch");
   }, [setLocale]);
 
   const handleSetLanguage = (lang) => {

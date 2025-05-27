@@ -67,7 +67,7 @@ export default function Home() {
         <div className="flex justify-between items-center gap-4">
           <Input
             type="number"
-            max={5000000}
+            max={10000000}
             value={amount}
             variant="static"
             label={t("amount")}
@@ -81,7 +81,7 @@ export default function Home() {
               const intValue = parseInt(rawValue, 10);
 
               if (!isNaN(intValue)) {
-                setAmount(Math.min(intValue, 5000000));
+                setAmount(Math.min(intValue, 10000000));
               }
             }}
           />

@@ -71,6 +71,18 @@ export const countryRules = {
     segments: ["900", "901", "902", "903", "905", "906", "907", "908", "909"],
     lastLength: 7,
   },
+  34: {
+    // Spain: 9-digit number, typically starts with 6, 7, or 9
+    country: "西班牙",
+    segments: ["6", "7", "9"],
+    lastLength: 8, // after the country code, total digits = 9
+  },
+  61: {
+    // Australia: Mobile numbers usually start with 4 (e.g., 04xx xxx xxx)
+    country: "澳大利亚",
+    segments: ["4"],
+    lastLength: 8, // after the '4', 8 digits follow for mobile
+  },
 };
 
 export function isValidActiveDetect(taskName, file) {

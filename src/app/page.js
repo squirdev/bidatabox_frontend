@@ -16,11 +16,6 @@ import { isValidActiveDetect } from "./helper";
 import { uploadRequest } from "./api/service";
 import Link from "next/link";
 
-export const generateMetadata = () => ({
-  title: "QiXiang",
-  description: "您可以以便宜的价格查看有效的 Telegram 和 Whatsapp 电话号码",
-});
-
 export default function Home() {
   const { t } = useLanguage();
   const { showAlert } = useAlert();

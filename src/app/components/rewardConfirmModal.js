@@ -70,7 +70,7 @@ const RewardConfirmModal = ({
             确认
           </Button>
           <Typography variant="small" className="mt-4 flex justify-center">
-            本次操作将消耗1250点积分
+            积分: 700(空号), 1250(TG), 400(WS)
           </Typography>
         </CardFooter>
       </Card>

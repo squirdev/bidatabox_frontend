@@ -175,8 +175,8 @@ const FreeRewards = () => {
                 </Typography>
                 <div>
                   <Typography variant="h5">{t("freeNumbers")} 20万</Typography>
-                  <Typography variant="h6" className="text-center">
-                    积分: 1250
+                  <Typography variant="small" className="text-center font-bold">
+                    积分: 1250(TG), 400(WS)
                   </Typography>
                 </div>
               </div>

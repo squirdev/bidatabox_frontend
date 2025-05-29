@@ -94,7 +94,7 @@ export default function Home() {
           />
           <Input
             readOnly
-            value={"65"}
+            value={35}
             variant="static"
             label={t("price")}
             placeholder={t("price")}

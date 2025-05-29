@@ -107,7 +107,7 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
             readOnly
             label={t("price")}
             variant="static"
-            value={user ? (social == "TG" ? user.tgCost : user.wsCost) : 0}
+            value={social == "TG" ? 65 : 20}
           />
         </div>
         <Input

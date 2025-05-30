@@ -1,12 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { Button, Input, Typography } from "@material-tailwind/react";
+import {
+  Button,
+  Checkbox,
+  Input,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+  Option,
+  Select,
+  Typography,
+} from "@material-tailwind/react";
 import { useLanguage } from "../../../context/LanguageProvider";
 import GenerateNote from "../components/generateNote";
 import { useAlert } from "../../../context/alertContext";
 import {
+  countryRules,
   downloadTextFile,
   generatePhoneNumbers,
   isValidGenerateParam,
@@ -17,16 +29,26 @@ export default function Home() {
   const { t } = useLanguage();
   const { showAlert } = useAlert();
   const [countryCode, setCountryCode] = useState("");
+  const [middleCode, setMiddleCode] = useState(new Set());
+  const [middleCodeList, setMiddleCodeList] = useState([]);
   const [amount, setAmount] = useState(200000);
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setMiddleCodeList(countryRules[countryCode]?.segments);
+  }, [countryCode]);
 
   const handleChangeFile = (e) => {
     setFile(e.target.files[0]);
   };
 
+  useEffect(() => {
+    setMiddleCode(new Set());
+  }, [countryCode]);
+
   const handleGenerate = async () => {
-    const validErrorMsg = isValidGenerateParam(amount, countryCode);
+    const validErrorMsg = isValidGenerateParam(amount, countryCode, middleCode);
     if (validErrorMsg) {
       showAlert(validErrorMsg);
       return;
@@ -36,6 +58,7 @@ export default function Home() {
       const result = await generatePhoneNumbers({
         file,
         amount,
+        middleCode,
         countryCode,
       });
       downloadTextFile(result);
@@ -56,15 +79,60 @@ export default function Home() {
       <div className="w-full mt-4 p-4 flex flex-col gap-12">
         <div className="flex justify-between items-center gap-4">
           <SelectCountry code={countryCode} setCode={setCountryCode} />
-          <Input
-            type="file"
-            variant="static"
-            className="file:hidden"
-            label={t("uploadCompareFiles")}
-            onChange={handleChangeFile}
-          />
+          {middleCodeList && middleCodeList.length > 0 && (
+            <Menu
+              variant="static"
+              dismiss={{
+                itemPress: false,
+              }}
+              className="w-full"
+              label={t("middleCode")}
+              onChange={(e) => console.log(e)}
+            >
+              <MenuHandler>
+                <Button className="w-full" variant="text">
+                  {t("selectMiddleCode")}
+                </Button>
+              </MenuHandler>
+              <MenuList>
+                {middleCodeList.map((option, index) => (
+                  <MenuItem className="p-0" key={index}>
+                    <label
+                      htmlFor={`item-${index}`}
+                      className="flex cursor-pointer items-center gap-2 p-2"
+                    >
+                      <Checkbox
+                        ripple={false}
+                        checked={middleCode.has(option)}
+                        id={`item-${index}`}
+                        onChange={(e) => {
+                          const isChecked = e.target.checked;
+                          if (isChecked) {
+                            setMiddleCode((prev) => {
+                              const newSet = new Set(prev);
+                              newSet.add(option);
+                              return newSet;
+                            });
+                          } else {
+                            setMiddleCode((prev) => {
+                              const newSet = new Set(prev);
+                              newSet.delete(option);
+                              return newSet;
+                            });
+                          }
+                        }}
+                        containerProps={{ className: "p-0" }}
+                        className="hover:before:content-none"
+                      />
+                      {option}
+                    </label>
+                  </MenuItem>
+                ))}
+              </MenuList>
+            </Menu>
+          )}
         </div>
-        <div className="flex justify-between items-center gap-4">
+        <div className="flex gap-4">
           <Input
             type="number"
             max={10000000}
@@ -73,7 +141,6 @@ export default function Home() {
             label={t("amount")}
             onChange={(e) => {
               const rawValue = e.target.value;
-
               if (rawValue === "") {
                 setAmount("");
                 return;
@@ -84,6 +151,13 @@ export default function Home() {
                 setAmount(Math.min(intValue, 10000000));
               }
             }}
+          />
+          <Input
+            type="file"
+            variant="static"
+            className="file:hidden"
+            label={t("uploadCompareFiles")}
+            onChange={handleChangeFile}
           />
         </div>
         <div>

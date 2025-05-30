@@ -113,20 +113,25 @@ export function isValidSocialDetect(taskName, file) {
   }
 }
 
-export function isValidGenerateParam(amount, countryCode) {
-  if (!amount || !countryCode) {
+export function isValidGenerateParam(amount, countryCode, middleCode) {
+  if (!amount || !countryCode || middleCode.size === 0) {
     return "请填写所有必填字段。";
   }
   return null;
 }
 
-export async function generatePhoneNumbers({ file, amount, countryCode }) {
+export async function generatePhoneNumbers({
+  file,
+  amount,
+  middleCode,
+  countryCode,
+}) {
   const rules = countryRules[countryCode];
   if (!rules) {
     throw new Error(`Unsupported country code: ${countryCode}`);
   }
 
-  const { segments, lastLength } = rules;
+  const { lastLength } = rules;
   const maxNumber = Math.pow(10, lastLength);
   const resultBatches = [];
   const currentBatch = new Set();
@@ -143,7 +148,9 @@ export async function generatePhoneNumbers({ file, amount, countryCode }) {
   }
 
   while (currentBatch.size < amount) {
-    const segment = segments[Math.floor(Math.random() * segments.length)];
+    const middleCodeArray = Array.from(middleCode);
+    const segment =
+      middleCodeArray[Math.floor(Math.random() * middleCodeArray.length)];
     const randomNumber = Math.floor(Math.random() * maxNumber);
     const lastPart = randomNumber.toString().padStart(lastLength, "0");
 

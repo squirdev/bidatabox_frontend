@@ -42,6 +42,7 @@
     "numberGeneration": "号码生成",
     "numberRegion": "号码地区",
     "countryCode": "国家代码",
+    "middleCode": "中间代码",
     "loginToAccount": "登录账户",
     "loginToAccountDescription": "请输入您的账号和密码以继续",
     "countryCodePlaceHolder": "请输入国家代码",
@@ -93,5 +94,6 @@
     "compareNote2": "系统会检测第一个文件和第二个文件中的号码是否相同。",
     "compareNote3": "然后会自动下载。",
     "freeNumbers": "免费号码：",
-    "addCompareTask": "添加比较任务"
+    "addCompareTask": "添加比较任务",
+    "selectMiddleCode": "选择中间代码"
 }

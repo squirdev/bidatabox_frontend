@@ -42,6 +42,7 @@
     "numberGeneration": "Number Generation",
     "numberRegion": "Number Region",
     "countryCode": "Country Code",
+    "middleCode": "Middle Code",
     "loginToAccount": "Login to Account",
     "loginToAccountDescription": "Please enter your account and password to continue",
     "countryCodePlaceHolder": "Please enter the country code",
@@ -93,5 +94,6 @@
     "compareNote2": "System will detect the same number from first and second file.",
     "compareNote3": "Then it will be downloaded automatically.",
     "freeNumbers": "Free:",
-    "addCompareTask": "Add Compare Task"
+    "addCompareTask": "Add Compare Task",
+    "selectMiddleCode": "Select Middle Code"
 }

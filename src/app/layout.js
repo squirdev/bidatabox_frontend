@@ -42,7 +42,7 @@ function RootLayout({ children }) {
                 />
               )}
               <AlertProvider>
-                <div className="w-full h-full p-4">{children}</div>
+                <div className="w-full h-full">{children}</div>
               </AlertProvider>
             </div>
           </LanguageProvider>

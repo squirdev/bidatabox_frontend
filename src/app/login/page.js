@@ -10,6 +10,7 @@ import { useLanguage } from "../../../context/LanguageProvider";
 import { useAlert } from "../../../context/alertContext";
 import { signIn } from "../api/auth";
 import { login } from "../../../redux/authSlice";
+import { Bs0CircleFill, BsEyeSlash, BsEye } from "react-icons/bs";
 
 export default function Home() {
   const { t } = useLanguage();
@@ -20,6 +21,7 @@ export default function Home() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +50,7 @@ export default function Home() {
 
   if (!t) return <p className="text-white">Loading translations...</p>;
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="w-full h-full flex justify-center items-center bg-[url('/land/1.jpg')] bg-cover bg-fixed">
       <Card
         color="transparent"
         shadow={true}
@@ -77,22 +79,31 @@ export default function Home() {
             <Typography variant="h6" color="blue-gray" className="-mb-3">
               {t("password")}
             </Typography>
-            <Input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type={t("password")}
-              placeholder={t("password")}
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
+            <div className="relative flex justify-end items-center">
+              <Input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type={isShowPassword ? "text" : "password"}
+                placeholder={t("password")}
+                className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+              />
+              <div
+                className="absolute cursor-pointer mr-4"
+                onClick={() => setIsShowPassword(!isShowPassword)}
+              >
+                {isShowPassword ? <BsEyeSlash /> : <BsEye />}
+              </div>
+            </div>
           </div>
           <Button
             loading={isLoading}
             type="submit"
             color="red"
             onClick={handleSubmit}
+            onSubmit={handleSubmit}
             className="mt-6 flex justify-center"
             fullWidth
           >

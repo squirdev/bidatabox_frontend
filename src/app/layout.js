@@ -24,8 +24,10 @@ function RootLayout({ children }) {
   const [sidebarShow, setSidebarShow] = useState(true);
 
   return (
-    <html lang="en">
+    <html lang="en" translate="no" className="notranslate">
       <head>
+        <meta name="googlebot" content="notranslate" />
+        <meta name="google" content="notranslate" />
         <title>QiXiang</title>
       </head>
       <body className="flex overflow-hidden">

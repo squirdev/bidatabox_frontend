@@ -1,7 +1,6 @@
 "use client";
 
 import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
-import { useSelector } from "react-redux";
 
 import { BsArrowCounterclockwise, BsDownload } from "react-icons/bs";
 import { AiFillDelete } from "react-icons/ai";
@@ -110,64 +109,50 @@ export default function Home() {
                 ? detectList.map((row, index) => {
                     return (
                       <tr key={index}>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal p-4"
-                          >
-                            {row.taskname}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal p-4"
-                          >
-                            {row.fileurl ?? "处理中..."}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal p-4"
-                          >
-                            {getSimplifiedDateTime(row.createdAt)}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal p-4"
-                          >
-                            {row.entirenumber}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="red"
-                            className="font-bold p-4"
-                          >
-                            {row.activenumber != null
-                              ? row.activenumber
-                              : "处理中..."}
-                          </Typography>
-                        </td>
-                        <td>
-                          <Typography
-                            variant="small"
-                            color="red"
-                            className="font-bold p-4"
-                          >
-                            {row.unregisternumber != null
-                              ? row.unregisternumber
-                              : "处理中..."}
-                          </Typography>
-                        </td>
+                        {[
+                          { key: "taskname", color: "blue-gray", bold: false },
+                          {
+                            key: "fileurl",
+                            color: "blue-gray",
+                            bold: false,
+                            fallback: "处理中...",
+                          },
+                          {
+                            key: "createdAt",
+                            color: "blue-gray",
+                            bold: false,
+                            format: getSimplifiedDateTime,
+                          },
+                          {
+                            key: "entirenumber",
+                            color: "blue-gray",
+                            bold: false,
+                          },
+                          {
+                            key: "activenumber",
+                            color: "red",
+                            bold: true,
+                            fallback: "处理中...",
+                          },
+                          {
+                            key: "unregisternumber",
+                            color: "red",
+                            bold: true,
+                            fallback: "处理中...",
+                          },
+                        ].map(({ key, color, bold, fallback, format }) => (
+                          <td key={key}>
+                            <Typography
+                              variant="small"
+                              color={color}
+                              className={`p-4 ${bold ? "font-bold" : "font-normal"}`}
+                            >
+                              {format
+                                ? format(row[key])
+                                : (row[key] ?? fallback)}
+                            </Typography>
+                          </td>
+                        ))}
                         <td>
                           <Tooltip content="Download File">
                             <IconButton

@@ -1,20 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import { Button, Input, Typography } from "@material-tailwind/react";
 import { BsArrowLeft } from "react-icons/bs";
 
 import UploadNote from "./components/uploadNote";
 import { useLanguage } from "../../context/LanguageProvider";
-import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "../../context/alertContext";
 import { getProfile } from "./api/user";
 import { logout, updateUser } from "../../redux/authSlice";
-import { useRouter } from "next/navigation";
 import { isValidActiveDetect } from "./helper";
 import { uploadRequest } from "./api/service";
-import Link from "next/link";
 
 export default function Home() {
   const { t } = useLanguage();

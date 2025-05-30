@@ -90,7 +90,6 @@ export const phoneDetectList = async ({ pageIndex, pageSize }) => {
       pageIndex,
       pageSize,
     });
-    console.log("Response", response);
     return response.data;
   } catch (error) {
     console.log("ERROR:", error);
@@ -105,7 +104,6 @@ export const socialDetectList = async ({ pageIndex, pageSize }) => {
       pageIndex,
       pageSize,
     });
-    console.log("Response", response);
     return response.data;
   } catch (error) {
     console.log("ERROR:", error);
@@ -119,7 +117,6 @@ export const phoneDeleteRow = async ({ id }) => {
     const response = await axiosApi.post("/service/phone-delete-row", {
       id,
     });
-    console.log("REsponse", response);
     return response.data;
   } catch (error) {
     console.log("ERROR:", error);
@@ -133,7 +130,6 @@ export const socialDeleteRow = async ({ id }) => {
     const response = await axiosApi.post("/service/social-delete-row", {
       id,
     });
-    console.log("REsponse", response);
     return response.data;
   } catch (error) {
     console.log("ERROR:", error);

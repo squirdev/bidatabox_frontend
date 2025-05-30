@@ -7,7 +7,6 @@ export const signIn = async (username, password) => {
       username: username,
       password: password,
     });
-    console.log("REsponse", response);
     return response.data;
   } catch (error) {
     console.log("ERROR:", error);

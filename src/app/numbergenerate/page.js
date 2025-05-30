@@ -10,8 +10,6 @@ import {
   MenuHandler,
   MenuItem,
   MenuList,
-  Option,
-  Select,
   Typography,
 } from "@material-tailwind/react";
 import { useLanguage } from "../../../context/LanguageProvider";
@@ -37,15 +35,12 @@ export default function Home() {
 
   useEffect(() => {
     setMiddleCodeList(countryRules[countryCode]?.segments);
+    setMiddleCode(new Set());
   }, [countryCode]);
 
   const handleChangeFile = (e) => {
     setFile(e.target.files[0]);
   };
-
-  useEffect(() => {
-    setMiddleCode(new Set());
-  }, [countryCode]);
 
   const handleGenerate = async () => {
     const validErrorMsg = isValidGenerateParam(amount, countryCode, middleCode);
@@ -87,14 +82,35 @@ export default function Home() {
               }}
               className="w-full"
               label={t("middleCode")}
-              onChange={(e) => console.log(e)}
             >
               <MenuHandler>
                 <Button className="w-full" variant="text">
                   {t("selectMiddleCode")}
                 </Button>
               </MenuHandler>
-              <MenuList>
+              <MenuList className="grid grid-cols-6">
+                <MenuItem className="p-0 col-span-6">
+                  <label
+                    htmlFor="item-all"
+                    className="flex cursor-pointer items-center gap-2 p-2"
+                  >
+                    <Checkbox
+                      ripple={false}
+                      id="item-all"
+                      onChange={(e) => {
+                        const isChecked = e.target.checked;
+                        if (isChecked) {
+                          setMiddleCode(new Set(middleCodeList));
+                        } else {
+                          setMiddleCode(new Set());
+                        }
+                      }}
+                      containerProps={{ className: "p-0" }}
+                      className="hover:before:content-none"
+                    />
+                    Select All
+                  </label>
+                </MenuItem>
                 {middleCodeList.map((option, index) => (
                   <MenuItem className="p-0" key={index}>
                     <label

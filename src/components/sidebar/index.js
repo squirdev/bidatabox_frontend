@@ -21,6 +21,8 @@ import {
   BsFillShareFill,
   BsFillGridFill,
   BsPhoneFill,
+  BsBinocularsFill,
+  BsGem,
 } from "react-icons/bs";
 
 import { useLanguage } from "../../../context/LanguageProvider";
@@ -94,7 +96,7 @@ const SideBar = ({ sidebarShow }) => {
     },
     {
       title: t("reward"),
-      icon: BsPhoneFill,
+      icon: BsGem,
       detail: [
         {
           subTitle: t("reward"),
@@ -104,7 +106,7 @@ const SideBar = ({ sidebarShow }) => {
     },
     {
       title: t("numberCompare"),
-      icon: BsPhoneFill,
+      icon: BsBinocularsFill,
       detail: [
         {
           subTitle: t("numberCompare"),

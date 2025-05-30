@@ -2,21 +2,9 @@
 
 import { useState } from "react";
 
-import {
-  Button,
-  Input,
-  Option,
-  Select,
-  Typography,
-} from "@material-tailwind/react";
+import { Button, Input, Typography } from "@material-tailwind/react";
 import { useLanguage } from "../../../context/LanguageProvider";
-import GenerateNote from "../components/generateNote";
 import { useAlert } from "../../../context/alertContext";
-import {
-  downloadTextFile,
-  generatePhoneNumbers,
-  isValidGenerateParam,
-} from "../helper";
 import CompareNote from "../components/compareNode";
 
 export default function Home() {

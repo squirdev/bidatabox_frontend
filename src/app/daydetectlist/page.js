@@ -1,24 +1,17 @@
 "use client";
 
-import {
-  Button,
-  IconButton,
-  Input,
-  Spinner,
-  Tooltip,
-  Typography,
-} from "@material-tailwind/react";
-import { useSelector } from "react-redux";
-
-import { BsArrowCounterclockwise, BsDownload } from "react-icons/bs";
-import { AiFillDelete } from "react-icons/ai";
-import { useLanguage } from "../../../context/LanguageProvider";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { IconButton, Tooltip, Typography } from "@material-tailwind/react";
+import { AiFillDelete } from "react-icons/ai";
+import { BsArrowCounterclockwise, BsDownload } from "react-icons/bs";
+
+import { useLanguage } from "../../../context/LanguageProvider";
 import { socialDeleteRow, socialDetectList } from "../api/service";
 import { getSimplifiedDateTime } from "../helper";
-import Link from "next/link";
 import { useAlert } from "../../../context/alertContext";
-import { useRouter } from "next/navigation";
 import TableLoading from "../components/tableLoading";
 import TableNoData from "../components/tableNoData";
 import TablePagination from "../components/tablePagination";
@@ -30,7 +23,6 @@ export default function Home() {
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isAuth } = useSelector((state) => state.auth);
   const { t } = useLanguage();
   const { showAlert } = useAlert();
   const router = useRouter();
@@ -90,14 +82,6 @@ export default function Home() {
       </div>
       <hr />
       <div className="w-full mt-4 p-4 flex flex-col gap-12">
-        {/* <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <div className="w-full md:w-72">
-            <Input
-              label={t("search")}
-              icon={<BsArrowCounterclockwise className="h-5 w-5" />}
-            />
-          </div>
-        </div> */}
         <div className="overflow-x-auto max-h-[400px] overflow-y-auto mt-4">
           <table className="w-full table-auto min-w-max text-left ">
             <thead>

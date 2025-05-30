@@ -1,24 +1,29 @@
 "use client";
-import { Card, Input, Button, Typography } from "@material-tailwind/react";
-import { useLanguage } from "../../../context/LanguageProvider";
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+
+import { Card, Input, Button, Typography } from "@material-tailwind/react";
+
+import { useLanguage } from "../../../context/LanguageProvider";
 import { useAlert } from "../../../context/alertContext";
 import { signIn } from "../api/auth";
-import { useDispatch } from "react-redux";
 import { login } from "../../../redux/authSlice";
-import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { t } = useLanguage();
   const { showAlert } = useAlert();
+  const dispatch = useDispatch();
   const router = useRouter();
+
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!username || !password) {
       showAlert("请输入所有详情");
       return;

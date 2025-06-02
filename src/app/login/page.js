@@ -11,6 +11,7 @@ import { useAlert } from "../../../context/alertContext";
 import { signIn } from "../api/auth";
 import { login } from "../../../redux/authSlice";
 import { Bs0CircleFill, BsEyeSlash, BsEye } from "react-icons/bs";
+import Image from "next/image";
 
 export default function Home() {
   const { t } = useLanguage();
@@ -51,6 +52,13 @@ export default function Home() {
   if (!t) return <p className="text-white">Loading translations...</p>;
   return (
     <div className="w-full h-full flex justify-center items-center bg-[url('/land/1.jpg')] bg-cover bg-fixed">
+      <Image
+        src="/log.png"
+        alt="log"
+        width={300}
+        height={120}
+        className="absolute top-0 left-8"
+      />
       <Card
         color="transparent"
         shadow={true}

@@ -65,6 +65,8 @@
     "type": "类型",
     "oldPassword": "旧密码",
     "oldPasswordDesc": "请输入原登录密码",
+    "newUserName": "新用戶名稱",
+    "newUserNameDesc": "請輸入您想要的新用戶名稱",
     "newPassword": "新密码",
     "newPasswordDesc": "新密码必须大于6个字符",
     "confirmPassword": "确认密码",

@@ -47,7 +47,7 @@ const ProfileDropDown = () => {
             {t("welcome")} {user?.realname}
           </Typography>
         </div>
-        {/* <MenuItem
+        <MenuItem
           onClick={() => setUpdatePasswordModalShow(true)}
           className="flex items-center gap-2"
         >
@@ -55,7 +55,7 @@ const ProfileDropDown = () => {
           <Typography variant="small" className="font-medium">
             {t("changePassword")}
           </Typography>
-        </MenuItem> */}
+        </MenuItem>
         <hr className="my-2 border-blue-gray-50" />
         <MenuItem className="flex items-center gap-2" onClick={handleLogout}>
           <AiOutlinePoweroff />

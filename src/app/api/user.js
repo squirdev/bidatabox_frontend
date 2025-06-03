@@ -11,37 +11,25 @@ export const getProfile = async () => {
   }
 };
 
-export const swapToken = async (from, to, amount) => {
+export const updateUserCredit = async ({
+  newUserName,
+  oldPassword,
+  newPassword,
+}) => {
   try {
-    const response = await axiosApi.post("/user/swap", {
-      from: from,
-      to: to,
-      amount: amount,
+    const response = await axiosApi.post("/user/update-user-credit", {
+      newUserName,
+      oldPassword,
+      newPassword,
     });
-    return response.data;
-  } catch (error) {
-    return null;
-  }
-};
-
-export const getExchangeRate = async (base, quote) => {
-  try {
-    let APIKEY = process.env.NEXT_PUBLIC_COINAPI_KEY;
-    let config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: `https://rest.coinapi.io/v1/exchangerate/${base}/${quote}`,
-      headers: {
-        Accept: "text/plain",
-        "X-CoinAPI-Key": APIKEY,
-      },
+    return {
+      success: true,
+      data: response.data,
     };
-
-    const response = await axios.request(config);
-    console.log(response.data);
-    return response.data; // 确保返回数据
   } catch (error) {
-    console.error("Error fetching exchange rate:", error);
-    return null; // 出错时返回 null
+    return {
+      success: false,
+      data: error.response.data,
+    };
   }
 };

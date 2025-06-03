@@ -65,6 +65,8 @@
     "type": "Type",
     "oldPassword": "Old Password",
     "oldPasswordDesc": "Please enter the original login password",
+    "newUserName": "New Username",
+    "newUserNameDesc": "Please enter the new username as you want",
     "newPassword": "New Password",
     "newPasswordDesc": "The new password must be greater than 6 characters",
     "confirmPassword": "Confirm Password",

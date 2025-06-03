@@ -35,13 +35,13 @@ function RootLayout({ children }) {
           <LanguageProvider>
             {shouldShowFooter && <SideBar sidebarShow={sidebarShow} />}
             <div className="w-full h-screen flex flex-col bg-blue-100/30">
-              {shouldShowFooter && (
-                <TopBar
-                  sidebarShow={sidebarShow}
-                  setSidebarShow={setSidebarShow}
-                />
-              )}
               <AlertProvider>
+                {shouldShowFooter && (
+                  <TopBar
+                    sidebarShow={sidebarShow}
+                    setSidebarShow={setSidebarShow}
+                  />
+                )}
                 <div className="w-full h-full">{children}</div>
               </AlertProvider>
             </div>

@@ -1,3 +1,9 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   Button,
   Input,
@@ -6,18 +12,14 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { BsListTask } from "react-icons/bs";
+
 import UploadNote from "./uploadNote";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
 import { getProfile } from "../api/user";
 import { logout, updateUser } from "../../../redux/authSlice";
 import { useLanguage } from "../../../context/LanguageProvider";
+import { useAlert } from "../../../context/alertContext";
 import { isValidSocialDetect } from "../helper";
 import { uploadSocialRequest } from "../api/service";
-import Link from "next/link";
-import { useAlert } from "../../../context/alertContext";
 
 const activeDayList = [0, 1, 2, 3, 5, 7, 15, 30, 45, 60];
 

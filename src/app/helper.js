@@ -612,6 +612,30 @@ export function isValidActiveDetect(taskName, file) {
   }
 }
 
+export function isValidCredit({
+  name,
+  oldPassword,
+  newPassword,
+  confirmPassword,
+}) {
+  if (!oldPassword || !newPassword || !confirmPassword || !name) {
+    return {
+      message: "请填写所有必填字段。",
+      valid: false,
+    };
+  } else if (newPassword != confirmPassword) {
+    return {
+      message: "确认密码不正确",
+      valid: false,
+    };
+  } else {
+    return {
+      message: "",
+      valid: true,
+    };
+  }
+}
+
 export function isValidSocialDetect(taskName, file) {
   if (!taskName || !file) {
     return {

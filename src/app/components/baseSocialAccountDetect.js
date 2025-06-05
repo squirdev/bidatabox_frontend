@@ -51,6 +51,7 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
       if (result) {
         if (result.RES == "100") {
           showAlert("已成功上传", "success");
+          router.push("/daydetectlist");
         } else {
           showAlert(result.ERR);
         }
@@ -111,7 +112,11 @@ const BaseSocialAccountDetect = ({ social, icon }) => {
             readOnly
             label={t("price")}
             variant="static"
-            value={social == "TG" ? 65 : 20}
+            value={
+              social == "TG"
+                ? process.env.NEXT_PUBLIC_TG_ACTIVE_SELL_PRICE
+                : process.env.NEXT_PUBLIC_WS_ACTIVE_SELL_PRICE
+            }
           />
         </div>
         <Input

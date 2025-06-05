@@ -94,7 +94,7 @@ export default function Home() {
           />
           <Input
             readOnly
-            value={35}
+            value={process.env.NEXT_PUBLIC_PHONE_ACTIVE_SELL_PRICE}
             variant="static"
             label={t("price")}
             placeholder={t("price")}
